@@ -1,15 +1,13 @@
 const net = require('net')
 const port = 8888
 
-const response = `HTTP/1.1 200 OK
-Content-Length: 13
-Server: jzz
-Connection: keep-alive
-Cache-Control: no-cache
-Content-type: application/json
-
-{ "msg": OK }
-`
+const response =
+  'HTTP/1.1 200 OK\r\n' +
+  'Content-Length: 7\r\n' +
+  'Server: jzz\r\n' +
+  'Content-type: application/json\r\n' +
+  '\r\n' +
+  '"hello"'
 
 const server = net.createServer((socket) => {
   console.log(`[${new Date().toLocaleString()}]`, 'client connected!')
