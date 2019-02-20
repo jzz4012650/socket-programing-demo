@@ -1,26 +1,9 @@
-const net = require('net')
+const http = require('./http')
 const port = 8888
 
-const response =
-  'HTTP/1.1 200 OK\r\n' +
-  'Content-Length: 7\r\n' +
-  'Server: jzz\r\n' +
-  'Content-type: application/json\r\n' +
-  '\r\n' +
-  '"hello"'
-
-const server = net.createServer((socket) => {
-  console.log(`[${new Date().toLocaleString()}]`, 'client connected!')
-  socket.on('data', (data) => {
-    console.log('[data] >>>>>')
-    console.log(data instanceof Buffer ? data.toString() : data)
-    console.log('[data] <<<<<')
-    socket.write(response)
-  })
-})
-
-server.on('close', () => {
-  console.log(`[${new Date().toLocaleString()}]`, 'client disconnected!')
+const server = http.createServer((req, res) => {
+  console.log(req)
+  res.send('hello ' + req.body)
 })
 
 server.on('error', (err) => {
